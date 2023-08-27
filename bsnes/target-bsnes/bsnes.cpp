@@ -1,4 +1,5 @@
 #include "bsnes.hpp"
+#include <ruby/rumble.h>
 #include <sfc/interface/interface.hpp>
 Video video;
 Audio audio;
@@ -51,6 +52,7 @@ auto nall::main(Arguments arguments) -> void {
   emulator = new SuperFamicom::Interface;
   program.create();
 
+  Rumble::get().init();
   Application::run();
   Instances::presentation.destruct();
   Instances::settingsWindow.destruct();
@@ -58,4 +60,5 @@ auto nall::main(Arguments arguments) -> void {
   Instances::cheatWindow.destruct();
   Instances::stateWindow.destruct();
   Instances::toolsWindow.destruct();
+  Rumble::get().deinit();
 }

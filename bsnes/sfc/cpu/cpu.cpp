@@ -1,4 +1,5 @@
 #include <sfc/sfc.hpp>
+#include <ruby/rumble.h>
 
 namespace SuperFamicom {
 
@@ -91,6 +92,12 @@ auto CPU::power(bool reset) -> void {
   reader = {&CPU::readDMA, this};
   writer = {&CPU::writeDMA, this};
   bus.map(reader, writer, "00-3f,80-bf:4300-437f");
+
+  reader = [] (uint address, uint8 data) -> uint8 {
+      return 0;
+  };
+  writer = {&Rumble::write, &Rumble::get()};
+  bus.map(reader, writer, "00-04:2000-20FF");
 
   if(!reset) random.array(wram, sizeof(wram));
 

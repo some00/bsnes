@@ -28,3 +28,4 @@ using namespace ruby;
 #include <ruby/video/video.cpp>
 #include <ruby/audio/audio.cpp>
 #include <ruby/input/input.cpp>
+#include <ruby/sdl_rumble.cpp>
