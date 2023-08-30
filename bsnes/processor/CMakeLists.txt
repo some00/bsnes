@@ -1,0 +1,18 @@
+add_library(processors)
+target_include_directories(processors PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
+target_link_libraries(processors PRIVATE co gb)
+
+function(add_if_enabled PROCESSOR)
+    list(FIND processors ${PROCESSOR} found)
+    if (NOT found EQUAL -1)
+        target_sources(processors PRIVATE ${PROCESSOR}/${PROCESSOR}.cpp)
+    endif()
+endfunction()
+
+add_if_enabled("arm7tdmi")
+add_if_enabled("gsu")
+add_if_enabled("hg51b")
+add_if_enabled("sm83")
+add_if_enabled("spc700")
+add_if_enabled("upd96050")
+add_if_enabled("wdc65816")
